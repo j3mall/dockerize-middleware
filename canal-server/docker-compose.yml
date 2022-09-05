@@ -1,0 +1,27 @@
+version: '3.8'
+
+networks:
+  net-docker:
+    external: false
+
+services:
+  canal-server:
+    image: canal/canal-server:v1.1.5
+    container_name: canal-server
+    restart: always
+    networks:
+      - net-docker
+    ports:
+      - 11111:11111
+    environment:
+      - canal.auto.scan=false
+      - canal.instance.master.address=127.0.0.1:3307
+      - canal.instance.dbUsername=rep
+      - canal.instance.dbPassword=456
+      - canal.instance.filter.regex=.*\\..*
+      - canal.destinations=master_mall
+      - canal.instance.connectionCharset=UTF-8
+      - canal.instance.tsdb.enable=true
+    volumes:
+      - /data/log/canal-server:/data/log/canal-server
+

@@ -12,12 +12,15 @@
 # Remove leading # to turn on a very important data integrity option: logging
 # changes to the binary log between backups.
 log_bin
-server_id=1
+server_id=1       # 配置 MySQL replaction 需要定义，不要和 canal 的 slaveId 重复
 gtid_mode=ON
 enforce_gtid_consistency=ON
 
 slow_query_log=ON
 long_query_time=1.0
+
+log-bin=mysql-bin # 开启 binlog
+binlog-format=ROW # 选择 ROW 模式
 
 #
 # Remove leading # to set options mainly useful for reporting servers.
