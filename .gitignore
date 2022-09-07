@@ -1,3 +1,4 @@
 
 tmp/
 /consul-server/data
+/zookeeper/data
