@@ -1,0 +1,21 @@
+version: '3.8'
+
+networks:
+  net-docker:
+    external: false
+
+services:
+  consul-node:
+    image: consul:1.13.1
+    container_name: consul-node
+    command: agent -server -bootstrap-expect=1 -node=consul-node1 -bind=0.0.0.0 -client=0.0.0.0 -datacenter=dc1 -config-dir /consul/conf.d -ui
+    networks:
+    restart: always
+    networks:
+      - net-docker
+    ports:
+      - 8500:8500
+    volumes:
+      - ./data:/consul/data
+      - ./conf.d:/consul/conf.d
+
