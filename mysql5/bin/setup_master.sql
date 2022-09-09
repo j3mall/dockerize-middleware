@@ -1,5 +1,5 @@
 
-CREATE DATABASE `master_mall` CHARACTER SET 'utf8';
+CREATE DATABASE IF NOT EXISTS `master_mall` CHARACTER SET 'utf8';
 CREATE user 'rep'@'%' IDENTIFIED BY '456';
 GRANT replication slave,replication client on *.* TO 'rep'@'%';
 
