@@ -5,3 +5,4 @@ tmp/
 /nacos-server/data
 standalone-logs/
 nacos-docker/example/mysql
+nacos-docker/mysql
