@@ -3,3 +3,5 @@ tmp/
 /consul-server/data
 /zookeeper/data
 /nacos-server/data
+standalone-logs/
+nacos-docker/example/mysql
