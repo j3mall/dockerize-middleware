@@ -9,7 +9,7 @@ services:
     image: zookeeper:3.8.0
     container_name: zookeeper
     networks:
-    restart: always
+    # restart: always
     networks:
       - net-docker
     ports:
