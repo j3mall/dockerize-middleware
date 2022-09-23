@@ -136,24 +136,25 @@ services:
       - es01
       - es02
     volumes:
-      - "./conf.d/logstash.conf:/config-dir/logstash.conf"
+      - "./config/logstash.yml:/usr/share/logstash/config/logstash.yml"
+      - "./config/logstash.conf:/usr/share/logstash/config/logstash.conf"
       
-  logstash02:
-    image: logstash:7.12.0
-    container_name: elk-cluster-logstash02
-    hostname: logstash02
-    # restart: always
-    environment:
-      #elasticsearch服务地址
-      - monitoring.elasticsearch.hosts="http://es01:9200"
-    ports:
-      - 9601:9600
-      - 5045:5044
-    networks:
-      - elk
-    depends_on:
-      - es01
-      - es02
+  # logstash02:
+  #   image: logstash:7.12.0
+  #   container_name: elk-cluster-logstash02
+  #   hostname: logstash02
+  #   # restart: always
+  #   environment:
+  #     #elasticsearch服务地址
+  #     - monitoring.elasticsearch.hosts="http://es01:9200"
+  #   ports:
+  #     - 9601:9600
+  #     - 5045:5044
+  #   networks:
+  #     - elk
+  #   depends_on:
+  #     - es01
+  #     - es02
       
   #####################kafka集群相关配置####################################
   #zookeeper集群
@@ -168,7 +169,7 @@ services:
       - elk
     volumes:
       - "/data/elk/zookeeper/zk01/data:/data"
-      - "/data/elk/zookeeper/zk01/logs:/datalog"
+      - "/data/elk/zookeeper/zk01/logs:/logs"
     environment:
       ZOO_MY_ID: 1
       ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zk02:2888:3888;2181
@@ -187,7 +188,7 @@ services:
       - elk
     volumes:
       - "/data/elk/zookeeper/zk02/data:/data"
-      - "/data/elk/zookeeper/zk02/logs:/datalog"
+      - "/data/elk/zookeeper/zk02/logs:/logs"
     environment:
       ZOO_MY_ID: 2
       ZOO_SERVERS: server.1=zk01:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181
